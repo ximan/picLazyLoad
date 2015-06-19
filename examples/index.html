@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, user-scalable=0" charset="UTF-8">
+    <title>picLazyLoad，图片懒加载插件</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    /* 防止点击闪烁 */
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    /* 缩放网页，文字大小不变 */
+    -webkit-text-size-adjust:none;
+}
+img{
+    vertical-align: top;
+}
+h1{
+    margin: 10px;
+    font-size: 20px;
+}
+h2{
+    margin: 10px;
+    font-size: 16px;
+}
+h3{
+    margin: 10px;
+    font-size: 14px;
+}
+.box{
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:-ms-flexbox;
+    display:flex;
+}
+.l,.r{
+    -webkit-box-flex:1;
+    -webkit-flex:1;
+    -ms-flex:1;
+    flex:1;
+    width: 100%;
+    border:1px solid #ccc;
+}
+.l img{
+    width: 100%;
+    height: auto;
+}
+.r{
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.scroll_x{
+    margin: 10px 0;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 0;
+}
+.scroll_x .pic_box{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+}
+.scroll_x .pic_box:last-child{
+    margin-right: 10px;
+}
+.scroll_x .pic_box img{
+    width: 100px;
+    height: 100px;
+}
+
+.scroll_y{
+    width: 102px;
+    height: 326px;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+}
+.scroll_y .pic_box{
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+.scroll_y .pic_box:last-child{
+    margin-bottom: 0;
+}
+.scroll_y .pic_box img{
+    width: 100px;
+    height: 100px;
+}
+</style>
+</head>
+<body>
+<h1><a href="http://ons.me/" target="_blank" title="一个热爱网络的年轻人的博客">西门的后花园</a></h1>
+<h2><a href="http://ons.me/484.html" target="_blank">picLazyLoad，图片懒加载插件</a></h2>
+<h3>根据网页滚动条懒加载，支持img标签和背景图片</h3>
+<div class="box">
+    <div class="l">
+        <img class="test-lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d8.yihaodianimg.com/N01/M05/FC/B4/CgQCrVNwafeAHGRjAALFc6P0kf416200.jpg" alt="">
+    </div>
+    <div class="r test-lazyload" data-original="http://d7.yihaodianimg.com/N03/M01/B6/1E/CgQCtVNM4tSAVeT_AAFx2RVJPuY77100.jpg"></div>
+</div>
+<div class="box">
+    <div class="l">
+        <img class="test-lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d8.yihaodianimg.com/N01/M0B/A3/F9/CgQCrVM9Qe6AbROFAAJ-K5D3Uoo71000.jpg" alt="">
+    </div>
+    <div class="r test-lazyload" data-original="http://d7.yihaodianimg.com/N01/M03/BA/29/CgQCrVNM4zCAVH2cAAF5XTZTQd474900.jpg"></div>
+</div>
+<div class="box">
+    <div class="l">
+        <img class="test-lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d8.yihaodianimg.com/N02/M07/FE/AC/CgQCslNwe1qAI_GUAAGjgytrMnQ12700.jpg" alt="">
+    </div>
+    <div class="r test-lazyload" data-original="http://d9.yihaodianimg.com/N01/M04/BA/29/CgQCrVNM41eAKjfEAAFTdM5dCIs84000.jpg"></div>
+</div>
+<div class="box">
+    <div class="l">
+        <img class="test-lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d6.yihaodianimg.com/N02/M01/3B/31/CgQCsVLM_Q2Ac4f8AAKBpM6RxqQ21200.jpg" alt="">
+    </div>
+    <div class="r test-lazyload" data-original="http://d6.yihaodianimg.com/N00/M07/D2/DB/CgMBmFNd0uCAXT4KAARfRe_q4eg37900.jpg"></div>
+</div>
+<div class="box">
+    <div class="l">
+        <img class="test-lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d8.yihaodianimg.com/N03/M01/AE/1D/CgQCs1NHptaAT224AAHr02MaHFU82300.jpg" alt="">
+    </div>
+    <div class="r test-lazyload" data-original="http://d6.yihaodianimg.com/N00/M0A/BE/2C/CgMBmFNN516AfrpuAAPMh9pgIiE23500.jpg"></div>
+</div>
+<div class="box">
+    <div class="l">
+        <img class="test-lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d7.yihaodianimg.com/N00/M04/1C/F2/CgMBmVKrwhaAcHDYAANHwt4hRss72400.jpg" alt="">
+    </div>
+    <div class="r test-lazyload" data-original="http://d9.yihaodianimg.com/N02/M00/8F/32/CgQCslMtJyyAJ9_JAACDKDMpVyQ29000.jpg"></div>
+</div>
+
+<h3>容器横向滚动懒加载</h3>
+<div class="scroll_x">
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d6.yihaodianimg.com/N06/M06/1B/79/CgQIzlVkF_mAZAu7AAPmr9uIvYw80300_200x200.jpg" alt="">
+    </div>
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d6.yihaodianimg.com/N05/M06/E8/11/CgQI0lU4nAWAEvfJAAT83V8-n3U48000_200x200.jpg" alt="">
+    </div>
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d6.yihaodianimg.com/N05/M00/7E/60/CgQI0lULtzWASydGAAGhA41cfGI60700_200x200.jpg" alt="">
+    </div>
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d6.yihaodianimg.com/N07/M05/70/1D/CgQI0FU4sqqAYor_AAP_X3yFozE52400_200x200.jpg" alt="">
+    </div>
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d6.yihaodianimg.com/N05/M02/85/0A/CgQI0lViuBSAdFHIAACaRNI5bSM86300_200x200.jpg" alt="">
+    </div>
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d6.yihaodianimg.com/N05/M0A/E2/FD/CgQI01U4Wk2ACaUyAAIVGnJYa5w68700_200x200.jpg" alt="">
+    </div>
+</div>
+<div class="scroll_x">
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d7.yihaodianimg.com/N02/M0B/6B/4C/CgQCslOgGgSANbESAAPijKZXb5g89300_200x200.jpg" alt="">
+    </div>
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d6.yihaodianimg.com/N05/M08/9E/41/CgQI01UfddyAU2N2AALV3ETUek861900_200x200.jpg" alt="">
+    </div>
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d9.yihaodianimg.com/N05/M01/AB/12/CgQI01UnYt2ADHaiAATLcvo_9mI81800_200x200.jpg" alt="">
+    </div>
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d8.yihaodianimg.com/N07/M03/47/BC/CgQIz1UnYUaAaSWpAATALt9yi-454900_200x200.jpg" alt="">
+    </div>
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d7.yihaodianimg.com/N06/M05/48/69/CgQIzVUnY_CAEHjZAATMxBWElq857500_200x200.jpg" alt="">
+    </div>
+</div>
+
+<h3>容器纵向滚动懒加载</h3>
+<div class="scroll_y">
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d6.yihaodianimg.com/N07/M00/CB/32/CgQI0FVcJVSAeRQzAATQHRuPwlc061001111_200x200.jpg" alt="">
+    </div>
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d7.yihaodianimg.com/N05/M08/0C/97/CgQI0lVB6TuAU52RAAT9mmv6stQ04600_200x200.jpg" alt="">
+    </div>
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d9.yihaodianimg.com/N01/M01/6F/C7/CgQCrlOryiiAcDXsAATCvayo_dI11300_200x200.jpg" alt="">
+    </div>
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d9.yihaodianimg.com/N03/M0B/C4/72/CgQCtFPfMEqAXKQwAATTLAXw_J060500_200x200.jpg" alt="">
+    </div>
+    <div class="pic_box">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-original="http://d7.yihaodianimg.com/N06/M03/9D/51/CgQIzlVB6WOARy19AAQNabtK_qM59900_200x200.jpg" alt="">
+    </div>
+</div>
+<script src="src/picLazyLoad.js"></script>
+<script>
+// 根据网页滚动条懒加载
+picLazyLoad({
+    className: "test-lazyload"
+});
+
+// 容器横向滚动懒加载
+picLazyLoad({
+    parent: 'scroll_x',
+    className: "lazyload",
+    direction: 'x',
+    threshold: 50
+});
+
+// 容器纵向滚动懒加载
+picLazyLoad({
+    parent: 'scroll_y',
+    className: "lazyload",
+    picError: 'https://www.baidu.com/img/bdlogo.png'
+});
+</script>
+</body>
+</html>
