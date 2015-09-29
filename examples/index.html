@@ -98,6 +98,18 @@ h3{
     width: 100px;
     height: 100px;
 }
+.fadeIn{
+    -webkit-animation: fadeIn 1s;
+}
+@-webkit-keyframes fadeIn {
+      0% {
+          opacity: 0;
+      }
+
+      100% {
+          opacity: 1;
+      }
+}
 </style>
 </head>
 <body>
@@ -217,7 +229,10 @@ picLazyLoad({
 picLazyLoad({
     parent: 'scroll_y',
     className: "lazyload",
-    picError: 'https://www.baidu.com/img/bdlogo.png'
+    picError: 'https://www.baidu.com/img/bdlogo.png',
+    callback: function(me){
+        me.classList.add('fadeIn');
+    }
 });
 </script>
 </body>

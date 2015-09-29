@@ -2,7 +2,7 @@
  * picLazyLoad
  * http://ons.me/484.html
  * 西门
- * 1.1.0(150619)
+ * 1.2.0(150929)
  */
 
 ;(function(win, $){
@@ -19,7 +19,8 @@
             className: 'lazyload',      // 懒加载类名
             direction: 'y',             // 滚动方向
             threshold: 0,               // 提前加载
-            picError: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='      // 图片加载失败替换
+            picError: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',      // 图片加载失败替换
+            callback : function(){}     // 每次滚动回调
         }, option);
 
         
@@ -125,6 +126,7 @@
                     }else{
                         $me.style.backgroundImage ='url('+original+')';
                     }
+                    me.option.callback($me);
                     $me.removeAttribute('data-original');
                 }
             }
